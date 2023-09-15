@@ -6,7 +6,7 @@ namespace Todo.Controllers;
 public class GenerateTokenController : Controller
 {
     /// <summary>
-    /// Generate an token to liberate acess to use api rotes.
+    /// Generates a token to release access to use api routes.
     /// </summary>
     [HttpPost("v1/token")]
     public async Task<IActionResult> GenerateToken([FromServices] ITokenService tokenService,
