@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Todo.DTO.Response;
-using Todo.Models;
+using Todo.DTO;
 using Todo.Services;
 
 namespace Todo.Controllers;
@@ -11,9 +10,9 @@ public class GenerateTokenController : Controller
     /// </summary>
     [HttpPost("v1/token")]
     public async Task<IActionResult> GenerateToken([FromServices] ITokenService tokenService,
-        [FromBody] string CPF)
+        [FromBody] TokenRequest req)
     {
-        var token = tokenService.GenerateToken(CPF);
+        var token = tokenService.GenerateToken(req.CPF);
         return Ok(new TokenResponse { AccessToken = token });
     }
 }

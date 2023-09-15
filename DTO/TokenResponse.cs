@@ -1,4 +1,4 @@
-﻿namespace Todo.DTO.Response
+﻿namespace Todo.DTO
 {
     public class TokenResponse
     {
