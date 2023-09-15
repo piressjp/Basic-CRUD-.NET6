@@ -11,13 +11,18 @@ namespace Todo.Controllers;
 
 public class HomeController : ControllerBase
 {
+    /// <summary>
+    /// Returns all existing users.
+    /// </summary>
     [HttpGet]
     [Route("/users-created")]
     /// pega tds os usuarios existentes do banco
     public IActionResult Get([FromServices] AppDbContext context)
         => Ok(context.Todos.AsNoTracking().ToList());
-    
 
+    /// <summary>
+    /// Returns an existing user by their ID.
+    /// </summary>
     [HttpGet]
     [Route("/users-created{id:int}")]
     /// pega os usuarios existentes do banco por id
@@ -29,9 +34,12 @@ public class HomeController : ControllerBase
 
         return Ok(todo);
     }
-    
+
+    /// <summary>
+    /// A new user has been registered.
+    /// </summary>
     [HttpPost]
-    [Route("/add-NewUser")]
+    [Route("/add-newUser")]
     /// adicionar um novo usuarios do banco
     public IActionResult Post([FromBody] TodoModel todo, [FromServices] AppDbContext context)
     {
@@ -40,6 +48,9 @@ public class HomeController : ControllerBase
         return Created($"/{todo.ID}", todo);
     }
 
+    /// <summary>
+    /// Change the registered user's phone number.
+    /// </summary>
     [HttpPut]
     [Route("update-phone/{id:int}")]
     /// atualiza info's de um usuario existente no banco de acordo com id
@@ -57,16 +68,14 @@ public class HomeController : ControllerBase
         return Ok(item);
     }
 
+    /// <summary>
+    /// Deletes a bank user by their ID.
+    /// </summary>
     [HttpDelete]
     [Route("/delete-user{id:int}")]
     /// deleta um usuarios do banco pelo seu correspondente id
     public IActionResult Delete([FromRoute] int id ,[FromServices] AppDbContext context)
     {
-        /// <summary>
-        /// Gera um código de autorização para agência.
-        /// </summary>
-        /// <param name="input">Informações necessárias da requisição para gerar o código de autorização.</param> 
-        /// <response code="201">Sucesso em criar codigo autorização!</response>
    
         var item = context.Todos.FirstOrDefault(x => x.ID == id);
         if (item == null)

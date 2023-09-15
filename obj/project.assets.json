@@ -1884,11 +1884,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hézio\\Source\\Repos\\Basic-CRUD-.NET6\\Todo.csproj",
+      "projectUniqueName": "C:\\Users\\Hézio\\Documents\\apiJP\\Basic-CRUD-.NET6\\Todo.csproj",
       "projectName": "Todo",
-      "projectPath": "C:\\Users\\Hézio\\Source\\Repos\\Basic-CRUD-.NET6\\Todo.csproj",
+      "projectPath": "C:\\Users\\Hézio\\Documents\\apiJP\\Basic-CRUD-.NET6\\Todo.csproj",
       "packagesPath": "C:\\Users\\Hézio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hézio\\Source\\Repos\\Basic-CRUD-.NET6\\obj\\",
+      "outputPath": "C:\\Users\\Hézio\\Documents\\apiJP\\Basic-CRUD-.NET6\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hézio\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3L+3jwhIGy1Sso3QbvXVY4bbKPPKAPs3YI/vUfHOiDxcxdflDgasu87lncmrjAxxndCxMWIqvSD5L+EL+YG1pQ==",
+  "dgSpecHash": "Ipbbcoc7G9c4qP1s1ZaC80CMggLEDzERrM2wqPje0kYV+YA3h398SlXBfkXOcGFgPS3D3zkUN3KK5Xzlfa+97A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hézio\\Source\\Repos\\Basic-CRUD-.NET6\\Todo.csproj",
+  "projectFilePath": "C:\\Users\\Hézio\\Documents\\apiJP\\Basic-CRUD-.NET6\\Todo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hézio\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Hézio\\.nuget\\packages\\microsoft.aspnet.webapi.client\\4.0.20710\\microsoft.aspnet.webapi.client.4.0.20710.nupkg.sha512",

@@ -16,11 +16,17 @@ builder.Services.AddSwaggerGen( c =>
         Version = "v1",
         Contact = new OpenApiContact
         {
-            Name = "Joao Paulo", 
-        }
+            Name = "Joao Paulo / Hézio Silva",
+            Email = "jpc0848@gmail.com",
+        },
+        Description = "Para mais informações, visite:\n" +
+                      "- LinkedIn: [Joao Paulo](https://www.linkedin.com/in/joaopaulo04/) | Github: [link](https://github.com/piressjp)\n" +
+                      "- LinkedIn: [Hézio Silva](https://www.linkedin.com/in/hezio-silva/) | Github: [link](https://github.com/HezioS1lv4)"
     });
 
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+
+    var xmlFile = "Todo.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
