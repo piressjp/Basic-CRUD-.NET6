@@ -10,12 +10,20 @@ namespace user.Controllers;
 [Authorize]
 public class HomeController : ControllerBase
 {
-    [HttpGet("v1/all")]
+    /// <summary>
+    /// Returns all existing users.
+    /// </summary>
+    [HttpGet]
+    [Route("v1/users-created")]
+    /// pega tds os usuarios existentes do banco
     public IActionResult Get([FromServices] AppDbContext context)
         => Ok(context.Users.AsNoTracking().ToList());
-    
 
-    [HttpGet("v1/{id:int}")]
+    /// <summary>
+    /// Returns an existing user by their ID.
+    /// </summary>
+    [HttpGet ("v1/users-created{id:int}")]
+    /// pega os usuarios existentes do banco por id
     public IActionResult GetById([FromRoute] int id, [FromServices] AppDbContext context)
     {
         var user = context.Users.AsNoTracking().FirstOrDefault(x => x.ID == id);
@@ -25,7 +33,11 @@ public class HomeController : ControllerBase
         return Ok(user);
     }
 
-    [HttpPost("v1")]
+    /// <summary>
+    /// A new user has been registered.
+    /// </summary>
+    [HttpPost ("v1/add-newUser")]
+    /// adicionar um novo usuarios do banco
     public IActionResult Post([FromBody] UserModel user, [FromServices] AppDbContext context)
     {
         context.Users.Add(user);
@@ -33,9 +45,12 @@ public class HomeController : ControllerBase
         return Created($"/{user.ID}", user);
     }
 
-    [HttpPut]
-    [Route("v1/{id:int}")]
-    public IActionResult Put([FromRoute] int id ,[FromServices] AppDbContext context, string telefone)
+    /// <summary>
+    /// Change the registered user's phone number.
+    /// </summary>
+    [HttpPut ("v1/update-phone/{id:int}")]
+    /// atualiza info's de um usuario existente no banco de acordo com id
+    public IActionResult Put([FromRoute] int id ,[FromServices] AppDbContext context, [FromBody] string telefone)
     {
         var item = context.Users.FirstOrDefault(x => x.ID == id);
         if(item == null)
@@ -49,10 +64,14 @@ public class HomeController : ControllerBase
         return Ok(item);
     }
 
-    [HttpDelete]
-    [Route("v1/{id:int}")]
+    /// <summary>
+    /// Deletes a bank user by their ID.
+    /// </summary>
+    [HttpDelete("v1/delete-user{id:int}")]
+    /// deleta um usuarios do banco pelo seu correspondente id
     public IActionResult Delete([FromRoute] int id ,[FromServices] AppDbContext context)
     {
+   
         var item = context.Users.FirstOrDefault(x => x.ID == id);
         if (item == null)
             return NoContent();

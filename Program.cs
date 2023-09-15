@@ -1,8 +1,11 @@
+using Microsoft.OpenApi.Models;
+using Swashbuckle.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using System.Reflection;
 using Todo.Data;
 using Todo.Options;
 using Todo.Services;
@@ -13,6 +16,27 @@ builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddControllers();
 
+builder.Services.AddSwaggerGen( c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Contact = new OpenApiContact
+        {
+            Name = "Joao Paulo / Hézio Silva",
+            Email = "jpc0848@gmail.com",
+        },
+        Description = "Para mais informações, visite:\n" +
+                      "- LinkedIn: [Joao Paulo](https://www.linkedin.com/in/joaopaulo04/) | Github: [link](https://github.com/piressjp)\n" +
+                      "- LinkedIn: [Hézio Silva](https://www.linkedin.com/in/hezio-silva/) | Github: [link](https://github.com/HezioS1lv4)"
+    });
+
+
+
+    var xmlFile = "Todo.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 // Add authentication
