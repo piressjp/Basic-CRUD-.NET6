@@ -4,7 +4,7 @@ using Todo.Models;
 namespace Todo.Data;
 public class AppDbContext : DbContext
 {
-    public DbSet<TodoModel> Todos { get; set; }
+    public DbSet<UserModel> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {

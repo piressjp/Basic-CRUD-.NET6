@@ -1,67 +1,63 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Todo.Data;
 using Todo.Models;
 
-namespace Todo.Controllers;
+namespace user.Controllers;
 
 [ApiController]
-[Route("v1")]
-
+[Authorize]
 public class HomeController : ControllerBase
 {
-    [HttpGet]
-    [Route("/")]
+    [HttpGet("v1/all")]
     public IActionResult Get([FromServices] AppDbContext context)
-        => Ok(context.Todos.AsNoTracking().ToList());
+        => Ok(context.Users.AsNoTracking().ToList());
     
 
-    [HttpGet]
-    [Route("/{id:int}")]
+    [HttpGet("v1/{id:int}")]
     public IActionResult GetById([FromRoute] int id, [FromServices] AppDbContext context)
     {
-        var todo = context.Todos.AsNoTracking().FirstOrDefault(x => x.ID == id);
-        if (todo == null)
-            return NotFound();
+        var user = context.Users.AsNoTracking().FirstOrDefault(x => x.ID == id);
+        if (user == null)
+            return NoContent();
 
-        return Ok(todo);
+        return Ok(user);
     }
 
-    [HttpPost]
-    [Route("/")]
-    public IActionResult Post([FromBody] TodoModel todo, [FromServices] AppDbContext context)
+    [HttpPost("v1/")]
+    public IActionResult Post([FromBody] UserModel user, [FromServices] AppDbContext context)
     {
-        context.Todos.Add(todo);
+        context.Users.Add(user);
         context.SaveChanges();
-        return Created($"/{todo.ID}", todo);
+        return Created($"/{user.ID}", user);
     }
 
     [HttpPut]
-    [Route("/{id:int}")]
-    public IActionResult Put([FromRoute] int id ,[FromServices] AppDbContext context, [FromBody] TodoModel todo)
+    [Route("v1/{id:int}")]
+    public IActionResult Put([FromRoute] int id ,[FromServices] AppDbContext context, string telefone)
     {
-        var item = context.Todos.FirstOrDefault(x => x.ID == id);
+        var item = context.Users.FirstOrDefault(x => x.ID == id);
         if(item == null)
-            return NotFound(todo);
+            return NoContent();
 
-        item.Title = todo.Title;
-        item.Done = todo.Done;
-        context.Todos.Update(item);
+        item.Telefone = telefone;
+
+        context.Users.Update(item);
         context.SaveChanges();
         
         return Ok(item);
     }
 
     [HttpDelete]
-    [Route("/{id:int}")]
+    [Route("v1/{id:int}")]
     public IActionResult Delete([FromRoute] int id ,[FromServices] AppDbContext context)
     {
-        var item = context.Todos.FirstOrDefault(x => x.ID == id);
+        var item = context.Users.FirstOrDefault(x => x.ID == id);
         if (item == null)
-            return NotFound(item);
+            return NoContent();
 
-        context.Todos.Remove(item);
+        context.Users.Remove(item);
         context.SaveChanges();
 
         return Ok("Deletado com sucesso");

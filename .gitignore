@@ -10,3 +10,6 @@
 
 #Ignore paste .vs
 /.vs
+
+#Ignore paste Migrations
+/Migrations
