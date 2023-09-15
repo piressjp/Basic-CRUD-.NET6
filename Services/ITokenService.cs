@@ -3,6 +3,6 @@
 namespace Todo.Services;
 public interface ITokenService
 {
-    string GenerateToken(UserModel user);
+    string GenerateToken(string CPF);
 }
 

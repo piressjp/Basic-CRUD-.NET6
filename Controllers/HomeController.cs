@@ -25,7 +25,7 @@ public class HomeController : ControllerBase
         return Ok(user);
     }
 
-    [HttpPost("v1/")]
+    [HttpPost("v1")]
     public IActionResult Post([FromBody] UserModel user, [FromServices] AppDbContext context)
     {
         context.Users.Add(user);

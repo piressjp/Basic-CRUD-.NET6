@@ -6,11 +6,11 @@ using Todo.Services;
 namespace Todo.Controllers;
 public class GenerateTokenController : Controller
 {
-    [HttpPost("v1/generate-token")]
+    [HttpPost("v1/token")]
     public async Task<IActionResult> GenerateToken([FromServices] ITokenService tokenService,
-        [FromBody] UserModel user)
+        [FromBody] string CPF)
     {
-        var token = tokenService.GenerateToken(user);
+        var token = tokenService.GenerateToken(CPF);
         return Ok(new TokenResponse { AccessToken = token });
     }
 }

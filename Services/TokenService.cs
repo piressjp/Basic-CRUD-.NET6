@@ -10,7 +10,7 @@ using Todo.Options;
 namespace Todo.Services;
 public class TokenService : ITokenService
 {
-    public string GenerateToken(UserModel user)
+    public string GenerateToken(string CPF)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(JWTConfiguration.JWTKey);
