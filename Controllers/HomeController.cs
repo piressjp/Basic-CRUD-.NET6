@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Todo.Data;
+using Todo.DTO;
 using Todo.Models;
 
-namespace user.Controllers;
+namespace Todo.Controllers;
 
 [ApiController]
 [Authorize]
@@ -50,13 +51,16 @@ public class HomeController : ControllerBase
     /// </summary>
     [HttpPut ("v1/update-phone/{id:int}")]
     /// atualiza info's de um usuario existente no banco de acordo com id
-    public IActionResult Put([FromRoute] int id ,[FromServices] AppDbContext context, [FromBody] string telefone)
+    public IActionResult Put([FromRoute] int id ,[FromServices] AppDbContext context, [FromBody] UpdateTelefoneRequest telefone)
     {
         var item = context.Users.FirstOrDefault(x => x.ID == id);
         if(item == null)
             return NoContent();
 
-        item.Telefone = telefone;
+        if (item.Telefone == telefone.ToString())
+            return BadRequest(new ErrorResponse<UpdateTelefoneRequest>("O telefone está atualizado"));
+
+        item.Telefone = telefone.Telefone;
 
         context.Users.Update(item);
         context.SaveChanges();
