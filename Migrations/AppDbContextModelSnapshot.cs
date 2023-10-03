@@ -15,7 +15,7 @@ namespace Todo.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
 
             modelBuilder.Entity("Todo.Models.UserModel", b =>
                 {
@@ -25,25 +25,35 @@ namespace Todo.Migrations
 
                     b.Property<string>("CPF")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(11)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("CPF");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                    b.Property<DateTime>("DT_Criacao")
+                        .HasMaxLength(60)
+                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnName("DT_Criacao");
 
                     b.Property<DateTime>("DT_Nascimento")
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(60)
+                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnName("DT_Nascimento");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(80)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("Nome");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(11)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("Telefone");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Users");
+                    b.ToTable("User", (string)null);
                 });
 #pragma warning restore 612, 618
         }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Todo.Data;
 using Todo.DTO;
-using Todo.Models;
+using Todo.Util;
 
 namespace Todo.Controllers;
 
@@ -11,6 +11,12 @@ namespace Todo.Controllers;
 [Authorize]
 public class HomeController : ControllerBase
 {
+    private readonly Parse _parse;
+    public HomeController(Parse parse)
+    {
+        _parse = parse;
+    }
+
     /// <summary>
     /// Returns all existing users.
     /// </summary>
@@ -39,11 +45,11 @@ public class HomeController : ControllerBase
     /// </summary>
     [HttpPost ("v1/add-newUser")]
     /// adicionar um novo usuarios do banco
-    public IActionResult Post([FromBody] UserModel user, [FromServices] AppDbContext context)
+    public IActionResult Post([FromBody] CreateUserRequest user, [FromServices] AppDbContext context)
     {
-        context.Users.Add(user);
+        context.Users.Add(_parse.ToModel(user));
         context.SaveChanges();
-        return Created($"/{user.ID}", user);
+        return Created(string.Empty, user);
     }
 
     /// <summary>
@@ -85,4 +91,5 @@ public class HomeController : ControllerBase
 
         return Ok("Deletado com sucesso");
     }
+
 }
